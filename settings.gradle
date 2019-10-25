@@ -1,0 +1,6 @@
+rootProject.name = 'SEC'
+include 'AI'
+include 'MainGUI'
+include 'AI2'
+include 'Robots'
+

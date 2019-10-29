@@ -41,10 +41,11 @@ public class MyGUI {
             }
         });
 
-        play.addActionListener(new ActionListener() {
+        play.addActionListener(new ActionListener() {                       //Action event for button click to open the arena
             @Override
             public void actionPerformed(ActionEvent e) {
                 MenuFrame.dispose();
+
                 ArenaClass test = new ArenaClass();
                 test.arenastart();
 

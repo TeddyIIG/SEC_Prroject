@@ -1,4 +1,4 @@
-public class RobotInfo {
+public class RobotInfo implements  RobotInfoInterface{
 
     public void setInfo(String rname,int posX,int posY,float Health) {
         Rname = rname;

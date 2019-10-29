@@ -14,8 +14,8 @@ public class SwingArena extends JPanel
     // requirements of your application.
     private int gridWidth = 20;
     private int gridHeight = 20;
-    private double robotX = 5;
-    private double robotY = 5;
+    private double robotX = 0;
+    private double robotY = 0;
 
     private double gridSquareSize; // Auto-calculated
 
@@ -91,9 +91,16 @@ public class SwingArena extends JPanel
         // ** You will need to adapt this to the requirements of your application. **
         drawImage(gfx, robot1, robotX, robotY);
         drawLabel(gfx, "Robot 1 (100%)", robotX, robotY);
-        drawLine(gfx, robotX, robotY, robotX + 1.0, robotY - 2.0);
-        drawImage(gfx, robot1, robotX, robotY);
-        drawLabel(gfx, "Robot 2 (100%)", robotX, robotY);
+        for(int i=-2; i <3 ; i++)
+        {
+            for(int t=-2;t<3;t++)
+            {
+                drawLine(gfx,robotX,robotY,robotX+i,robotY+t);
+            }
+
+        }
+        drawLine(gfx, robotX, robotY, robotX + 0, robotY + 0);
+
     }
 
 

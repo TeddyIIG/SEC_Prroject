@@ -4,18 +4,19 @@ import javax.swing.*;
 /**
  * A Swing GUI element that displays a grid on which you can draw images, text and lines.
  */
-public class SwingArena extends JPanel
-{
+public class SwingArena extends JPanel {
     // Represents the image to draw. You can modify this to introduce multiple images.
     private static final String IMAGE_FILE = "1554047213.png";
-    private ImageIcon robot1;
+    ImageIcon robot1;
 
-    // The following values are arbitrary, and you may need to modify them according to the
-    // requirements of your application.
+
+    //Initial values of the grid size and the placement of the two robots
     private int gridWidth = 20;
     private int gridHeight = 20;
     private double robotX = 0;
     private double robotY = 0;
+    EnterRobotInfo obj1;
+
 
     private double gridSquareSize; // Auto-calculated
 
@@ -23,12 +24,22 @@ public class SwingArena extends JPanel
     /**
      * Creates a new arena object, loading the robot image.
      */
-    public SwingArena()
-    {
+    public SwingArena() {
         // Here's how you get an Image object from an image file (which you provide in the
         // 'resources/' directory.
-        robot1 = new ImageIcon(getClass().getClassLoader().getResource(IMAGE_FILE));
-        // You will get an exception here if the specified image file cannot be found.
+        try {
+            robot1 = new ImageIcon(getClass().getClassLoader().getResource(IMAGE_FILE));
+
+
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(new JFrame(), "No Image found in specified directory", "Error", JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+
+        }
+
+         obj1 = new EnterRobotInfo();
+
+
     }
 
 
@@ -36,24 +47,19 @@ public class SwingArena extends JPanel
      * Moves a robot image to a new grid position. This method is a *demonstration* of how you
      * can do such things, and you may want or need to modify it substantially.
      */
-    public void setRobotPosition(double x, double y)
-    {
-        robotX = x;
-        robotY = y;
-        repaint();
-    }
+
+
 
 
     /**
      * This method is called in order to redraw the screen, either because the user is manipulating
      * the window, OR because you've called 'repaint()'.
-     *
+     * <p>
      * You will need to modify the last part of this method; specifically the sequence of calls to
      * the other 'draw...()' methods. You shouldn't need to modify anything else about it.
      */
     @Override
-    public void paintComponent(Graphics g)
-    {
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D gfx = (Graphics2D) g;
         gfx.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
@@ -74,34 +80,48 @@ public class SwingArena extends JPanel
         gfx.setColor(Color.GRAY);
         gfx.drawRect(0, 0, arenaPixelWidth - 1, arenaPixelHeight - 1); // Outer edge
 
-        for(int gridX = 1; gridX < gridWidth; gridX++) // Internal vertical grid lines
+        for (int gridX = 1; gridX < gridWidth; gridX++) // Internal vertical grid lines
         {
             int x = (int) ((double) gridX * gridSquareSize);
             gfx.drawLine(x, 0, x, arenaPixelHeight);
         }
 
-        for(int gridY = 1; gridY < gridHeight; gridY++) // Internal horizontal grid lines
+        for (int gridY = 1; gridY < gridHeight; gridY++) // Internal horizontal grid lines
         {
             int y = (int) ((double) gridY * gridSquareSize);
             gfx.drawLine(0, y, arenaPixelWidth, y);
         }
 
 
-        // Invoke helper methods to draw things at the current location.
-        // ** You will need to adapt this to the requirements of your application. **
-        drawImage(gfx, robot1, robotX, robotY);
-        drawLabel(gfx, "Robot 1 (100%)", robotX, robotY);
-        for(int i=-2; i <3 ; i++)
-        {
-            for(int t=-2;t<3;t++)
-            {
-                drawLine(gfx,robotX,robotY,robotX+i,robotY+t);
+
+            for(RobotInfo robots : obj1.Allrobots  ) {
+
+                robotX = robots.getpX();
+                robotY = robots.getpY();
+                drawImage(gfx, robot1, robotX, robotY);
+                drawLabel(gfx, robots.getRname() + " " + robots.getHealth(), robotX, robotY);
+
             }
 
-        }
-        drawLine(gfx, robotX, robotY, robotX + 0, robotY + 0);
 
+        /**
+         if (firestat == true) {
+         drawLine(gfx, robotX, robotY, erobotX, erobotY);
+         } **/
     }
+
+
+/**
+ drawImage(gfx, robot1, 4, robotY);
+ drawLabel(gfx, robotname + " " + health,4, robotY);
+ drawLine(gfx, 4, robotY, erobotX, erobotY); **/
+
+
+
+
+
+
+
 
 
     /**

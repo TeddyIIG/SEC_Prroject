@@ -1,45 +1,33 @@
-public class RobotControlImpl implements RobotControl  {
+public class RobotControlImpl implements RobotControl {
+    RobotInfo RobotVal1;
+    EnterRobotInfo objer;
 
+
+    RobotControlImpl()
+    {
+        RobotVal1 = new RobotInfoImpl();
+
+    }
 
 
 public RobotInfo getRobotInfo()
 {
-      RobotInfo robot = new RobotInfo();
-      return robot;
+
+
+
+        return RobotVal1;
 
 }
 
 public RobotInfo[] getAllRobots()
 {
-RobotInfo[] allrobots = new RobotInfo[10];
-for (int i=0; i < allrobots.length; i++)
-{
-    allrobots[i] = new RobotInfo();
-
-}
-
-return  allrobots;
+ return objer.Allrobots;
 
 }
 
 public boolean moveNorth(int maxX)
 {
-RobotInfo robot = new RobotInfo();
-int y = robot.getpY();
-int x = maxX;
-
-if (y < 0 || y >= maxX )
-{
-return false;
-
-}
-
-else
- {
-    y= y-1;
-    robot.setpX(y);
-    return true;
- }
+    return false;
 
 }
 /**

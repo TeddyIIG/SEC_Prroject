@@ -5,7 +5,11 @@ import java.awt.event.ActionListener;
 import java.awt.Graphics;
 
 public class MyGUI {
+    EnterRobotInfo aRobots;
+    {
 
+        aRobots = new EnterRobotInfo();
+    }
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
